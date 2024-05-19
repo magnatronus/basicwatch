@@ -8,6 +8,9 @@ This is just a simple example and the result of a lot of trial, error and readin
 - https://betterprogramming.pub/sending-data-between-watchos-and-ios-apps-cf924e21b3c2
 - https://medium.com/swlh/how-to-use-watchconnectivity-to-send-data-from-phone-to-watch-plus-most-common-errors-793d41976618
 
+# Disclaimer
+This is just a demo app that I wanted to share to show an example of a **watchOS** app embedded into a Flutter app and sending data to it. It is NOT a text book example on how to code this up in a production release, just more of a *'here you go, hope this is useful'* as a lot of the effort for me to get this working has come from the effort of others.
+
 
 # Step One
 
@@ -41,10 +44,10 @@ Xcode build done.
 The **important** bit is  *Watch companion app found*. If this works  then on the phone switch to the **Watch** app and you should see (in my case) **watchdemo** in the list of *available apps*. Select this and install the app then check it is available on the watch.
 
 
-## Step Two
+# Step Two
 Now that is working we will add the message sending capabilities between the **watch** app and the **iOS** app. This step involves adding **WatchConnectivity** to both the iOS app and the watch app.
 
-### Watch App 
+## Watch App 
 A new swift file (*File->New->File*) is added to the watch app  that I called **WatchConnectivity** ,  adding it the the *watchdemo Watch App* target. Look at the code for details, but basically add a ref to **WatchConnectivity**, an observable class and an extension for the WatchConnectivity functionality.
 
 The Watch app is then modified and 2 buttons are placed on the screen, see **ContentView.swift** these simply use the created observable class (not strictly required, but I may use it later for feedback) to send a message to the iOS app using the **start()** and **stop()** methods.
@@ -78,6 +81,63 @@ Using Xcode, observe the logs and you should see 3 things,
 
 - a line when the app started that  says ```Watch Session Supported``` this comes form the activation code we added.
 - a line each time you press a button on the watch ```message received by phone from watch``` this indicates the message is received by the iOS app.
+
+
+# Step Three
+
+This is the last step and involves adding a Channel so that the Flutter app can detect the messages being sent from the Watch app. First modify the **session** method in the iOS AppDelegate extension from a simple print to allow it to open a **MethodChannel** and communicate to the Flutter app - please note this is one way only to the app, it could also be from the app to the watch. (but beyond what I wanted at this point).
+
+The replacement code
+
+```swift
+DispatchQueue.main.async {
+    print("message received by phone from watch, dispatching")
+    if let method = message["method"] as? String, let data = message["data"] as? String {
+        if let controller = self.window?.rootViewController as? FlutterViewController {
+            let channel = FlutterMethodChannel( name: "demo.spiralarm.watch", binaryMessenger: controller.binaryMessenger)
+            channel.invokeMethod(method, arguments: data)
+        }
+        
+    }
+}
+```
+
+This basically uses MethodChannel to send the Flutter app a message when the watch sends one.
+
+With that done, we also update the Flutter app to be able to react to the MethodChannel messages, for this we add a methodChannel:
+
+```dart
+String _phoneMessage = 'none';
+final MethodChannel channel = const MethodChannel('demo.spiralarm.watch');
+```
+
+And then code to react to any messages that come in:
+
+```dart
+  Future<void> _channelInit() async {
+    channel.setMethodCallHandler((call) async {
+      final rxd = 'FROM PHONE: ${call.method} - ${call.arguments}';
+      debugPrint(rxd);
+      setState(() {
+        _phoneMessage = rxd;
+      });
+    });
+  }
+```
+
+Finally **_channelInit** needs to be added to the **initState** method of the Stateful widget.
+
+```dart
+  @override
+  void initState() {
+    super.initState();
+    _channelInit();
+  }
+```
+
+If all is well then when the app is run and the watch app buttons are pressed you should see the messags displayed on the Flutter app screen.
+
+
 
 
 ## Getting Started

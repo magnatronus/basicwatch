@@ -31,7 +31,15 @@ extension AppDelegate: WCSessionDelegate {
     }
         
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print("message received by phone from watch")
+        DispatchQueue.main.async {
+            print("message received by phone from watch, dispatching")
+            if let method = message["method"] as? String, let data = message["data"] as? String {
+                if let controller = self.window?.rootViewController as? FlutterViewController {
+                    let channel = FlutterMethodChannel( name: "demo.spiralarm.watch", binaryMessenger: controller.binaryMessenger)
+                    channel.invokeMethod(method, arguments: data)
+                }
+            }
+        }
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {

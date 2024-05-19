@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,6 +57,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _phoneMessage = 'none';
+  final MethodChannel channel = const MethodChannel('demo.spiralarm.watch');
+
+  Future<void> _channelInit() async {
+    channel.setMethodCallHandler((call) async {
+      final rxd = 'FROM PHONE: ${call.method} - ${call.arguments}';
+      debugPrint(rxd);
+      setState(() {
+        _phoneMessage = rxd;
+      });
+    });
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -66,6 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _channelInit();
   }
 
   @override
@@ -105,8 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              _phoneMessage,
             ),
             Text(
               '$_counter',
