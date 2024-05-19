@@ -1,15 +1,15 @@
 # basicwatch
 
-An update to my original project found here [Flutter WatchTips](https://github.com/magnatronus/flutter-watchtips). This is a basic iOS watchOS embedded Flutter app that demos a watch app tha can send data to a Flutter app via iOS.
+This is an companion update to my original project found here [Flutter WatchTips](https://github.com/magnatronus/flutter-watchtips). It is a basic iOS watchOS embedded Flutter app that demos a watch app that can send data to a Flutter app via iOS.
 
-This is just a simple example and the result of a lot of trial, error and reading **many** article on the subject My thanks to these articles for all the help and suggestions that have allowed me to get this going, some are listed below:
+This is only a simple example and the result of a lot of trial, error and reading **many** articles on the subject. My thanks to these article authors for all the help and suggestions that have allowed me to get this going, some are listed below:
 
 - https://medium.com/@pranilshah4024/flutter-with-watchos-b0b909b45c89
 - https://betterprogramming.pub/sending-data-between-watchos-and-ios-apps-cf924e21b3c2
 - https://medium.com/swlh/how-to-use-watchconnectivity-to-send-data-from-phone-to-watch-plus-most-common-errors-793d41976618
 
-# Disclaimer
-This is just a demo app that I wanted to share to show an example of a **watchOS** app embedded into a Flutter app and sending data to it. It is NOT a text book example on how to code this up in a production release, just more of a *'here you go, hope this is useful'* as a lot of the effort for me to get this working has come from the effort of others.
+## Disclaimer
+Although just a demo app, I wanted to share it to show an example of a **watchOS** app embedded into a Flutter app and sending data to it. It is NOT a text book example on how to code this up in a production release, just more of a *'here you go, hope this is useful'* as a lot of the effort for me to get this working has come from the effort of others.
 
 
 # Step One
@@ -56,7 +56,7 @@ We then need to modify **AppDelegate** to be able to ingest the messages send fr
 
 ## AppDelegate
 
-As before add a ref to **WatchConnectivity** abd create an extension to process the **WatchConnectivity** functionality.
+As before add a ref to **WatchConnectivity** and create an extension to process the **WatchConnectivity** functionality.
 
 Modify the **AppDelegate** class and add a WCSession.
 
@@ -75,11 +75,11 @@ if WCSession.isSupported() {
 }
 ```
 
-Again run the Flutter app and check that everythin is OK. If it is run the Wtach app(it may take a while to reload) and this time there should be 2 buttons on the watch app.
+Again run the Flutter app and check that everythin is OK. If it is run the Watch app(it may take a while to reload) and this time there should be 2 buttons on the watch app.
 
 Using Xcode, observe the logs and you should see 3 things, 
 
-- a line when the app started that  says ```Watch Session Supported``` this comes form the activation code we added.
+- a line when the app started that  says ```Watch Session Supported``` this comes from the activation code we added.
 - a line each time you press a button on the watch ```message received by phone from watch``` this indicates the message is received by the iOS app.
 
 
