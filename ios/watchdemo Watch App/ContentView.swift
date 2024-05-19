@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel: WatchConnectivityModel = WatchConnectivityModel()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Start") {
+                viewModel.start()
+            }
+            Button("Stop") {
+                viewModel.stop()
+            }
         }
         .padding()
     }

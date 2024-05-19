@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		2A5D69382BF9F1A300D173A6 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D69372BF9F1A300D173A6 /* WatchConnectivity.swift */; };
 		2AE4BD6F2BF9E5BD00681157 /* watchdemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4BD6E2BF9E5BD00681157 /* watchdemoApp.swift */; };
 		2AE4BD712BF9E5BD00681157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4BD702BF9E5BD00681157 /* ContentView.swift */; };
 		2AE4BD732BF9E5BE00681157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AE4BD722BF9E5BE00681157 /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		2A5D69372BF9F1A300D173A6 /* WatchConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivity.swift; sourceTree = "<group>"; };
 		2AE4BD6C2BF9E5BD00681157 /* watchdemo Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "watchdemo Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE4BD6E2BF9E5BD00681157 /* watchdemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = watchdemoApp.swift; sourceTree = "<group>"; };
 		2AE4BD702BF9E5BD00681157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				2AE4BD702BF9E5BD00681157 /* ContentView.swift */,
 				2AE4BD722BF9E5BE00681157 /* Assets.xcassets */,
 				2AE4BD742BF9E5BE00681157 /* Preview Content */,
+				2A5D69372BF9F1A300D173A6 /* WatchConnectivity.swift */,
 			);
 			path = "watchdemo Watch App";
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A5D69382BF9F1A300D173A6 /* WatchConnectivity.swift in Sources */,
 				2AE4BD712BF9E5BD00681157 /* ContentView.swift in Sources */,
 				2AE4BD6F2BF9E5BD00681157 /* watchdemoApp.swift in Sources */,
 			);

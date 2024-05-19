@@ -41,7 +41,43 @@ Xcode build done.
 The **important** bit is  *Watch companion app found*. If this works  then on the phone switch to the **Watch** app and you should see (in my case) **watchdemo** in the list of *available apps*. Select this and install the app then check it is available on the watch.
 
 
+## Step Two
+Now that is working we will add the message sending capabilities between the **watch** app and the **iOS** app. This step involves adding **WatchConnectivity** to both the iOS app and the watch app.
 
+### Watch App 
+A new swift file (*File->New->File*) is added to the watch app  that I called **WatchConnectivity** ,  adding it the the *watchdemo Watch App* target. Look at the code for details, but basically add a ref to **WatchConnectivity**, an observable class and an extension for the WatchConnectivity functionality.
+
+The Watch app is then modified and 2 buttons are placed on the screen, see **ContentView.swift** these simply use the created observable class (not strictly required, but I may use it later for feedback) to send a message to the iOS app using the **start()** and **stop()** methods.
+
+We then need to modify **AppDelegate** to be able to ingest the messages send from the watch app.
+
+## AppDelegate
+
+As before add a ref to **WatchConnectivity** abd create an extension to process the **WatchConnectivity** functionality.
+
+Modify the **AppDelegate** class and add a WCSession.
+
+```swift
+var session: WCSession? 
+```
+
+and session activation code just before the *application* method returns.
+
+```swift
+if WCSession.isSupported() {
+    print("Watch Session Supported")
+    session = WCSession.default;
+    session?.delegate = self;
+    session?.activate();
+}
+```
+
+Again run the Flutter app and check that everythin is OK. If it is run the Wtach app(it may take a while to reload) and this time there should be 2 buttons on the watch app.
+
+Using Xcode, observe the logs and you should see 3 things, 
+
+- a line when the app started that  says ```Watch Session Supported``` this comes form the activation code we added.
+- a line each time you press a button on the watch ```message received by phone from watch``` this indicates the message is received by the iOS app.
 
 
 ## Getting Started
