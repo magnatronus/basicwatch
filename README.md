@@ -8,6 +8,9 @@ This is only a simple example and the result of a lot of trial, error and readin
 - https://betterprogramming.pub/sending-data-between-watchos-and-ios-apps-cf924e21b3c2
 - https://medium.com/swlh/how-to-use-watchconnectivity-to-send-data-from-phone-to-watch-plus-most-common-errors-793d41976618
 
+
+**You will need to set a DevelopmentTeam/Provisioning profile in the Xcode project for this to work**
+
 ## Disclaimer
 Although just a demo app, I wanted to share it to show an example of a **watchOS** app embedded into a Flutter app and sending data to it. It is NOT a text book example on how to code this up in a production release, just more of a *'here you go, hope this is useful'* as a lot of the effort for me to get this working has come from the effort of others.
 
